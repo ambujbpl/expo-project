@@ -1,42 +1,37 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import React , { useState } from 'react';
+import { StyleSheet, Text, View, TextInput, Button, ScrollView, FlatList } from 'react-native';
+import ItemList from './components/itemList';
+import ItemInput from './components/itemInput';
 
 export default function App() {
-  const [ inputText, setInputText ] = useState('');
+ 
   const [ allGoalsList, setAllGoalsList ] = useState([]);
-  const setInputTextHandler = (test) => {
-    setInputText(test);
-  }
-  
-  const setAddNewGoalList = () => {
-    console.log('value : ',inputText);
-    setAllGoalsList([...allGoalsList, inputText]);
-    console.log('allGoalsList : ',allGoalsList);
+  const setAddNewGoalList = (inputText) => {
+    setAllGoalsList([...allGoalsList, { key: Math.random().toString(), value: inputText}]);
   }
   return (
-    <View style={{padding:50}}>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-        <TextInput 
-          placeholder='Course Goal'
-          style={{width: 200, borderColor: 'black', borderWidth : 1, padding: 10 }}
-          onChangeText = {setInputTextHandler}
-          value = {inputText}
-        />
-        <Button title='Add' onPress={setAddNewGoalList}/>
-      </View>
-      <View>
-        {allGoalsList.map( (goal) => <Text key={ goal }>{ goal }</Text>)}        
-      </View>
+    <View style={styles.mainView}>
+      <ItemInput onAddGoal={setAddNewGoalList}/>
+      <FlatList 
+        data={allGoalsList} 
+        renderItem={ itemData => <ItemList title={itemData.item.value} />}
+      /> 
     </View>
   );
 }
 
+{/* <ScrollView>
+  {allGoalsList.map( (goal) => (
+  <Text style={styles.listText} key={ goal }>
+    { goal }
+  </Text>
+  ))}        
+</ScrollView> */}
+
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  mainView: {
+    padding:50
   },
 });
