@@ -10,25 +10,27 @@ export default function App() {
   const setAddNewGoalList = (inputText) => {
     setAllGoalsList([...allGoalsList, { key: Math.random().toString(), value: inputText}]);
   }
+  const deleteItemOnGoalList = (id) => {
+    setAllGoalsList(currentAllGoalsList => {
+      return currentAllGoalsList.filter((goal) => goal.key != id)
+    });
+  }
+
   return (
     <View style={styles.mainView}>
       <ItemInput onAddGoal={setAddNewGoalList}/>
       <FlatList 
         data={allGoalsList} 
-        renderItem={ itemData => <ItemList title={itemData.item.value} />}
+        renderItem={ itemData => 
+        <ItemList 
+          deleteItem={deleteItemOnGoalList} 
+          title={itemData.item.value} 
+          id={itemData.item.key} 
+        />}
       /> 
     </View>
   );
 }
-
-{/* <ScrollView>
-  {allGoalsList.map( (goal) => (
-  <Text style={styles.listText} key={ goal }>
-    { goal }
-  </Text>
-  ))}        
-</ScrollView> */}
-
 
 const styles = StyleSheet.create({
   mainView: {
