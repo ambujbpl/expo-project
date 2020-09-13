@@ -12,7 +12,7 @@ import ItemInput from './components/itemInput';
 export default function App() {
  
   const [ allGoalsList, setAllGoalsList ] = useState([]);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [ modalVisible, setModalVisible ] = useState(false);
   const setAddNewGoalList = (inputText) => {
     setAllGoalsList([...allGoalsList, { key: Math.random().toString(), value: inputText}]);
     cancelAddNewGoal();
@@ -25,7 +25,7 @@ export default function App() {
   const cancelAddNewGoal = () => {
     setModalVisible(false);
   };
-
+  console.log('allGoalsList : ',allGoalsList);
   return (
     <View style={styles.mainView}>
       <Button title='Add New Goal' onPress={() => setModalVisible(true)}/>
