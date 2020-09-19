@@ -51,7 +51,7 @@ const StartScreen = (props) => {
       <Card style={GlobalStyles.mt20}>
         <Text>You selected</Text>
         <NumberContainer>{selectedNumber}</NumberContainer>
-        <Button title="Start Game"/>
+        <Button title="Start Game" onPress={() => props.onStartGame(selectedNumber)} />
       </Card>
     );
   }
@@ -63,7 +63,7 @@ const StartScreen = (props) => {
       }}
     >
       <View style={styles.screenMainStyle}>
-        <Text style={styles.title}>{props.titleText}</Text>
+        <Text style={styles.title}>Start a New Game!</Text>
         <Card style={styles.inputContainerStyle}>
           <Text>Select a Number</Text>
           <Input
@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     marginVertical: 10,
+    fontFamily: 'open-sans-bold'
   },
   inputContainerStyle: {
     width: 300,
