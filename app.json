@@ -21,6 +21,9 @@
     },
     "web": {
       "favicon": "./app/assets/favicon.png"
+    },
+    "android": {
+      "package": "com.ambuj.ideata.expoproject"
     }
   }
 }
