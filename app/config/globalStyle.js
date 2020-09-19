@@ -21,5 +21,13 @@ export const GlobalStyles = StyleSheet.create({
   },
   fs22: {
     fontSize: 22,
+  },
+  bodyText: {
+    fontFamily: 'open-sans'
+  },
+  title: {
+    fontFamily: 'open-sans-bold',
+    fontSize: 20,
+    marginVertical: 10,
   }
 });

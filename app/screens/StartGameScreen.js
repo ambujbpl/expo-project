@@ -14,6 +14,7 @@ import Card from "./../components/Card";
 import Input from "./../components/Input";
 import Colors from "./../config/colors";
 import { GlobalStyles } from '../config/globalStyle';
+import MainButton from "../components/MainButton";
 const StartScreen = (props) => {
   const [enteredValue, setEnteredValue] = useState(null);
   const [confirm, setConfirm] = useState(false);
@@ -51,7 +52,8 @@ const StartScreen = (props) => {
       <Card style={GlobalStyles.mt20}>
         <Text>You selected</Text>
         <NumberContainer>{selectedNumber}</NumberContainer>
-        <Button title="Start Game" onPress={() => props.onStartGame(selectedNumber)} />
+        <MainButton onPress={() => props.onStartGame(selectedNumber)}>Start Game</MainButton>
+        {/* <Button title="Start Game" onPress={() => props.onStartGame(selectedNumber)} /> */}
       </Card>
     );
   }
@@ -63,7 +65,7 @@ const StartScreen = (props) => {
       }}
     >
       <View style={styles.screenMainStyle}>
-        <Text style={styles.title}>Start a New Game!</Text>
+        <Text style={GlobalStyles.title}>Start a New Game!</Text>
         <Card style={styles.inputContainerStyle}>
           <Text>Select a Number</Text>
           <Input
@@ -106,11 +108,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     alignItems: "center",
-  },
-  title: {
-    fontSize: 20,
-    marginVertical: 10,
-    fontFamily: 'open-sans-bold'
   },
   inputContainerStyle: {
     width: 300,

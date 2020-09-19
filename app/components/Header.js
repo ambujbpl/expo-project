@@ -1,11 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { GlobalStyles } from "../config/globalStyle";
 import Colors from "./../config/colors";
 
 const Header = (props) => {
   return (
     <View style={styles.headerStyle}>
-      <Text style={styles.headerTextStyle}>{props.title}</Text>
+      <Text style={GlobalStyles.title}>{props.title}</Text>
     </View>
   );
 };
