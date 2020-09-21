@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button, Image } from 'react-native';
+import { View, Text, StyleSheet, Button, Image, Dimensions, ScrollView } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import MainButton from '../components/MainButton';
 import colors from '../config/colors';
@@ -8,6 +8,7 @@ import { GlobalStyles } from '../config/globalStyle';
 
 const GameOver = props => {
   return (
+    <ScrollView>
     <View style={styles.screen}>
       <Text style={GlobalStyles.title}>
         The Game is Over!
@@ -27,7 +28,8 @@ const GameOver = props => {
       </Text>
       <MainButton onPress={props.newGame}>New Game</MainButton>
       {/* <Button title="New Game" onPress={props.newGame}/> */}
-    </View>
+      </View>
+      </ScrollView>
   );
 };
 export default GameOver;
@@ -39,9 +41,14 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   imageContainerStyle: {
-    width: 300,
-    height: 300,
-    borderRadius: 150,
+    // width: 300,
+    // height: 300,
+    // width: Dimensions.get('window').width > 400 ? 300 : 220,
+    // height: Dimensions.get('window').height > 600 ? 300 : 220,
+    // borderRadius: 150,
+    width: Dimensions.get('window').width * 0.7,
+    height: Dimensions.get('window').width * 0.7,
+    borderRadius: Dimensions.get('window').width * 0.7 / 2,
     borderWidth: 3,
     borderColor: 'black',
     overflow: 'hidden',
@@ -49,7 +56,7 @@ const styles = StyleSheet.create({
   },
   imageStyle: {
     width: '100%',
-    height: '100%',
+    height: '100%',    
   },
   highlight: {
     color: colors.primary,

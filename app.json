@@ -3,10 +3,10 @@
     "name": "expo-project",
     "slug": "expo-project",
     "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./app/assets/splash_image.jpg",
+    "orientation": "default",
+    "icon": "./app/assets/icon.png",
     "splash": {
-      "image": "./app/assets/splash_image.jpg",
+      "image": "./app/assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -20,7 +20,7 @@
       "supportsTablet": true
     },
     "web": {
-      "favicon": "./app/assets/splash_image.jpg"
+      "favicon": "./app/assets/favicon.png"
     },
     "android": {
       "package": "com.ambuj.ideata.expoproject"
