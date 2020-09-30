@@ -1,0 +1,5 @@
+1 pop() :- return to previous screen where stack navigation start.
+2 popToTop() :- return to main screen where stack navigation start.
+2 push() :- go to same screen or another stack screen 
+3 goBack() :- return to previous screen where any navigation start.
+4 replace() :- go to next screen without back functionalities on stack screen
