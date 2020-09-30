@@ -1,76 +1,30 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, FlatList, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import Header from './components/header';
-import TodoItem from './components/todoItem';
-import AddTodo from './components/addTodo';
-const _ = require('underscore');
+import { Text, View } from 'react-native';
+import * as Font from 'expo-font';
+import { AppLoading } from 'expo';
+
+const fetchFonts = () => {
+  return Font.loadAsync({
+    'open-sans': require('./app/assets/fonts/OpenSans-Regular.ttf'),
+    'open-sans-bold': require('./app/assets/fonts/OpenSans-Bold.ttf')
+  });
+};
+
 export default function App() {
-  const [todos, setTodos] = useState([
-    // { text: 'Defualt', key: '1' }
-  ]);
+  const [fontLoaded, setFontLoaded] = useState(false);
 
-  const pressHandler = (key) => {
-    setTodos(prevTodos => {
-      return prevTodos.filter(todo => todo.key != key);
-    });
-  };
-
-  const submitHandler = (text) => {
-    if (text.length > 3) {
-      let checkList = _.where(todos, { "text": text });
-      if (checkList.length > 0) {
-        Alert.alert('OOPS', 'Hi Todo must be unique', [
-          {text: 'Understood', onPress: () => console.log('alert closed') }
-        ]);        
-      } else {        
-        setTodos(prevTodos => {
-          return [
-            { text, key: Math.random().toString() },
-            ...prevTodos
-          ];
-        });
-      }
-    } else {
-      Alert.alert('OOPS', 'Todo must be over 3 characters long', [
-        {text: 'Understood', onPress: () => console.log('alert closed') }
-      ]);
-    }
-  };
+  if (!fontLoaded) {
+    return (
+      <AppLoading
+        startAsync={fetchFonts}
+        onFinish={() => setFontLoaded(true)}
+      />
+    );
+  }
 
   return (
-    <TouchableWithoutFeedback onPress={() => {
-      Keyboard.dismiss();
-      console.log('dismissed');
-    }}>
-      <View style={styles.container}>
-        <Header />
-        <View style={styles.content}>
-          <AddTodo submitHandler={submitHandler} />
-          <View style={styles.list}>
-            <FlatList
-              data={todos}
-              renderItem={({ item }) => (
-                <TodoItem item={item} pressHandler={pressHandler} />
-              )}
-            />
-          </View>
-        </View>
-      </View>
-    </TouchableWithoutFeedback>
+    <View>
+      <Text>Open up App.js to start working on your app!</Text>
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  content: {
-    padding: 40,
-    flex: 1,
-  },
-  list: {
-    marginTop: 20,
-    flex: 1,
-  },
-});
