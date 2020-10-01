@@ -3,3 +3,13 @@
 2 push() :- go to same screen or another stack screen 
 3 goBack() :- return to previous screen where any navigation start.
 4 replace() :- go to next screen without back functionalities on stack screen
+
+
+Other Tab refrence
+https://reactnavigation.org/docs/bottom-tab-navigator/
+https://reactnavigation.org/docs/material-bottom-tab-navigator/
+https://reactnavigation.org/docs/material-top-tab-navigator/
+
+
+icons refrence
+https://icons.expo.fyi/
