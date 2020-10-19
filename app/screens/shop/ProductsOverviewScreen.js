@@ -6,7 +6,7 @@ import {
   Button,
   Platform,
   ActivityIndicator,
-  StyleSheet,
+  StyleSheet
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
@@ -33,6 +33,17 @@ const ProductsOverviewScreen = props => {
     }
     setIsLoading(false);
   }, [dispatch, setIsLoading, setError]);
+
+  useEffect(() => {
+    const willFocusSub = props.navigation.addListener(
+      'willFocus',
+      loadProducts
+    );
+
+    return () => {
+      willFocusSub.remove();
+    };
+  }, [loadProducts]);
 
   useEffect(() => {
     loadProducts();
