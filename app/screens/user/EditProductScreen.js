@@ -109,6 +109,7 @@ const EditProductScreen = props => {
 
   return (
     <KeyboardAvoidingView
+      style={{ flex: 1 }}
       behavior="padding"
       keyboardVerticalOffset={100}
     >
