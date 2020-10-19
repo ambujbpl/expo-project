@@ -1,1 +1,1 @@
-export const url = `https://app-store-project.firebaseio.com/`;
+export const url = `https://app-store-project.firebaseio.com`;
