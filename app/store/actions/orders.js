@@ -9,7 +9,7 @@ export const fetchOrders = () => {
     const userId = getState().auth.userId;
     try {
       const response = await fetch(
-        `${url}/orders/u1.json`
+        `${url}/orders/${userId}.json`
       );
 
       if (!response.ok) {

@@ -104,7 +104,7 @@ const AuthScreen = props => {
   return (
     <KeyboardAvoidingView
       behavior="padding"
-      keyboardVerticalOffset={50}
+      keyboardVerticalOffset={10}
       style={styles.screen}
     >
       <LinearGradient colors={['#ffedff', '#ffe3ff']} style={styles.gradient}>
