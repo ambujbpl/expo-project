@@ -1,5 +1,5 @@
 import Product from '../../models/product';
-
+import { url } from './firebase';
 export const DELETE_PRODUCT = 'DELETE_PRODUCT';
 export const CREATE_PRODUCT = 'CREATE_PRODUCT';
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
@@ -10,7 +10,7 @@ export const fetchProducts = () => {
     // any async code you want!
     try {
       const response = await fetch(
-        'https://app-store-project.firebaseio.com/products.json'
+        `${url}/products.json`
       );
 
       if (!response.ok) {
@@ -42,9 +42,10 @@ export const fetchProducts = () => {
 };
 
 export const deleteProduct = productId => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
+    const token = getState().auth.token;
     const response = await fetch(
-      `https://app-store-project.firebaseio.com/products/${productId}.json`,
+      `${url}/products/${productId}.json?auth=${token}`,
       {
         method: 'DELETE'
       }
@@ -58,10 +59,11 @@ export const deleteProduct = productId => {
 };
 
 export const createProduct = (title, description, imageUrl, price) => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
     // any async code you want!
+    const token = getState().auth.token;
     const response = await fetch(
-      'https://app-store-project.firebaseio.com/products.json',
+      `${url}/products.json?auth=${token}`,
       {
         method: 'POST',
         headers: {
@@ -92,9 +94,10 @@ export const createProduct = (title, description, imageUrl, price) => {
 };
 
 export const updateProduct = (id, title, description, imageUrl) => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
+    const token = getState().auth.token;
     const response = await fetch(
-      `https://app-store-project.firebaseio.com/products/${id}.json`,
+      `${url}/products/${id}.json?auth=${token}`,
       {
         method: 'PATCH',
         headers: {

@@ -1,10 +1,10 @@
 export const SIGNUP = 'SIGNUP';
 export const LOGIN = 'LOGIN';
-
+import { web_api_key } from './firebase';
 export const signup = (email, password) => {
   return async dispatch => {
     const response = await fetch(
-      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBlZG5g8l8la4ArLU0P-PUtT3ec-Vj22Wo',
+      `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${web_api_key}`,
       {
         method: 'POST',
         headers: {
@@ -19,25 +19,25 @@ export const signup = (email, password) => {
     );
 
     if (!response.ok) {
-        const errorResData = await response.json();
-        const errorId = errorResData.error.message;
-        let message = 'Something went wrong!';
-        if (errorId === 'EMAIL_EXISTS') {
-          message = 'This email exists already!';
-        }
-        throw new Error(message);
+      const errorResData = await response.json();
+      const errorId = errorResData.error.message;
+      let message = 'Something went wrong!';
+      if (errorId === 'EMAIL_EXISTS') {
+        message = 'This email exists already!';
       }
+      throw new Error(message);
+    }
 
     const resData = await response.json();
     console.log(resData);
-    dispatch({ type: SIGNUP });
+    dispatch({ type: SIGNUP, token: resData.idToken, userId: resData.localId });
   };
 };
 
 export const login = (email, password) => {
   return async dispatch => {
     const response = await fetch(
-      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBlZG5g8l8la4ArLU0P-PUtT3ec-Vj22Wo',
+      `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${web_api_key}`,
       {
         method: 'POST',
         headers: {
@@ -65,6 +65,6 @@ export const login = (email, password) => {
 
     const resData = await response.json();
     console.log(resData);
-    dispatch({ type: LOGIN });
+    dispatch({ type: LOGIN, token: resData.idToken, userId: resData.localId });
   };
 };

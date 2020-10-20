@@ -1,5 +1,5 @@
 import Order from '../../models/order';
-
+import { url } from './firebase';
 export const ADD_ORDER = 'ADD_ORDER';
 export const SET_ORDERS = 'SET_ORDERS';
 
@@ -7,7 +7,7 @@ export const fetchOrders = () => {
   return async dispatch => {
     try {
       const response = await fetch(
-        'https://app-store-project.firebaseio.com/orders/u1.json'
+        `${url}/orders/u1.json`
       );
 
       if (!response.ok) {
@@ -35,10 +35,11 @@ export const fetchOrders = () => {
 };
 
 export const addOrder = (cartItems, totalAmount) => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
+    const token = getState().auth.token;
     const date = new Date();
     const response = await fetch(
-      'https://app-store-project.firebaseio.com/orders/u1.json',
+      `${url}/orders/u1.json?auth=${token}`,
       {
         method: 'POST',
         headers: {
