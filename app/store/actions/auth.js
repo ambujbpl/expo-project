@@ -1,6 +1,7 @@
 export const SIGNUP = 'SIGNUP';
 export const LOGIN = 'LOGIN';
 import { web_api_key } from './firebase';
+
 export const signup = (email, password) => {
   return async dispatch => {
     const response = await fetch(
