@@ -4,6 +4,7 @@
     "description": "This is test shop app which help to understnd react-redux state management and auth with firebase",
     "slug": "shop-app",
     "privacy": "public",
+    "sdkVersion": "39.0.0",
     "platforms": [
       "ios",
       "android",
@@ -11,9 +12,9 @@
     ],
     "version": "1.0.0",
     "orientation": "default",   
-    "icon": "./app/assets/places.png",
+    "icon": "./app/assets/places-adaptive.png",
     "splash": {
-      "image": "./app/assets/splash_icon.png",
+      "image": "./app/assets/places-adaptive.png",
       "resizeMode": "contain",
       "backgroundColor": "#171717"
     },
