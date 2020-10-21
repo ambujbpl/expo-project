@@ -1,14 +1,21 @@
 {
   "expo": {
-    "name": "expo-project",
-    "slug": "expo-project",
+    "name": "Shop App",
+    "description": "This is test shop app which help to understnd react-redux state management and auth with firebase",
+    "slug": "shop-app",
+    "privacy": "public",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "version": "1.0.0",
-    "orientation": "default",
-    "icon": "./app/assets/icon.png",
+    "orientation": "default",   
+    "icon": "./app/assets/places.png",
     "splash": {
-      "image": "./app/assets/splash.png",
+      "image": "./app/assets/splash_icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#171717"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
