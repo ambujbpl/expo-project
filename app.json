@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Shop App",
+    "name": "Utility App",
     "description": "This is test shop app which help to understnd react-redux state management and auth with firebase",
     "slug": "shop-app",
     "privacy": "public",
