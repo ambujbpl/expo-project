@@ -1,5 +1,5 @@
 const vars = {
-    googleApiKey: 'AIzaSyD-ZPcMh4YKvZJSo-H2C7ESf2PEDJWlcEc',
+    googleApiKey: 'AIzaSyBlZG5g8l8la4ArLU0P-PUtT3ec-Vj22Wo',
     latitude: 35.9375,
     longitude: 14.3754,
     latitudeDelta: 0.0922,
