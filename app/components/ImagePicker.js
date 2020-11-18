@@ -6,9 +6,10 @@ import * as Permissions from 'expo-permissions';
 import Colors from '../constants/Colors';
 
 const ImgPicker = props => {
-  [pickedImage, setPickedImage] = useState('');
+  const [pickedImage, setPickedImage] = useState();
+
   const verifyPermissions = async () => {
-    const result = await Permissions.askAsync(Permissions.CAMERA,Permissions.CAMERA_ROLL);
+    const result = await Permissions.askAsync(Permissions.CAMERA_ROLL);
     if (result.status !== 'granted') {
       Alert.alert(
         'Insufficient permissions!',
@@ -23,23 +24,26 @@ const ImgPicker = props => {
   const takeImageHandler = async () => {
     const hasPermission = await verifyPermissions();
     if (!hasPermission) {
-        return;
+      return;
     }
-    let image = await ImagePicker.launchCameraAsync({
+    const image = await ImagePicker.launchCameraAsync({
       allowsEditing: true,
-      aspect: [16,9],
+      aspect: [16, 9],
       quality: 0.5
     });
-    console.log('image : ',image);
-    setPickedImage(image.uri)
+
+    setPickedImage(image.uri);
+    props.onImageTaken(image.uri);
   };
 
   return (
     <View style={styles.imagePicker}>
       <View style={styles.imagePreview}>
-        { !pickedImage ?
-          <Text>No image picked yet.</Text> : <Image source={{uri: pickedImage}} style={styles.image} />
-        }
+        {!pickedImage ? (
+          <Text>No image picked yet.</Text>
+        ) : (
+          <Image style={styles.image} source={{ uri: pickedImage }} />
+        )}
       </View>
       <Button
         title="Take Image"
@@ -52,7 +56,8 @@ const ImgPicker = props => {
 
 const styles = StyleSheet.create({
   imagePicker: {
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 15
   },
   imagePreview: {
     width: '100%',
