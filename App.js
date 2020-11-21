@@ -28,11 +28,26 @@ export default function App() {
       });
   }, []);
 
+  useEffect(() => {
+    const subscription = Notifications.addNotificationReceivedListener(
+      (notification) => {
+        console.log('notification : ',notification);
+      }
+    );
+
+    console.log('subscription : ',subscription);
+    
+    return () => {
+      subscription.remove();
+    };
+  }, []);
+
   const triggerNotificationHandler = () => {
     Notifications.scheduleNotificationAsync({
       content: {
         title: 'My first local notification',
         body: 'This is the first local notification we are sending!',
+        data: { mySpecialData: 'Some text' },
       },
       trigger: {
         seconds: 10,
