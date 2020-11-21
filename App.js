@@ -1,48 +1,61 @@
-import React, { useState } from 'react';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
-import { AppLoading } from 'expo';
-import * as Font from 'expo-font';
-import ReduxThunk from 'redux-thunk';
+import { StatusBar } from 'expo-status-bar';
+import React, { useEffect } from 'react';
+import { StyleSheet, Button, View } from 'react-native';
+import * as Notifications from 'expo-notifications';
+import * as Permissions from 'expo-permissions';
 
-import productsReducer from './app/store/reducers/products';
-import cartReducer from './app/store/reducers/cart';
-import ordersReducer from './app/store/reducers/orders';
-import authReducer from './app/store/reducers/auth';
-import AppNavigator from './app/navigation/AppNavigator';
-
-const rootReducer = combineReducers({
-  products: productsReducer,
-  cart: cartReducer,
-  orders: ordersReducer,
-  auth: authReducer
+Notifications.setNotificationHandler({
+  handleNotification: async () => {
+    return {
+      shouldShowAlert: true,
+    };
+  },
 });
 
-const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
-
-const fetchFonts = () => {
-  return Font.loadAsync({
-    'open-sans': require('./app/assets/fonts/OpenSans-Regular.ttf'),
-    'open-sans-bold': require('./app/assets/fonts/OpenSans-Bold.ttf')
-  });
-};
-
 export default function App() {
-  const [fontLoaded, setFontLoaded] = useState(false);
+  useEffect(() => {
+    Permissions.getAsync(Permissions.NOTIFICATIONS)
+      .then((statusObj) => {
+        if (statusObj.status !== 'granted') {
+          return Permissions.askAsync(Permissions.NOTIFICATIONS);
+        }
+        return statusObj;
+      })
+      .then((statusObj) => {
+        if (statusObj.status !== 'granted') {
+          return;
+        }
+      });
+  }, []);
 
-  if (!fontLoaded) {
-    return (
-      <AppLoading
-        startAsync={fetchFonts}
-        onFinish={() => {
-          setFontLoaded(true);
-        }}
-      />
-    );
-  }
+  const triggerNotificationHandler = () => {
+    Notifications.scheduleNotificationAsync({
+      content: {
+        title: 'My first local notification',
+        body: 'This is the first local notification we are sending!',
+      },
+      trigger: {
+        seconds: 10,
+      },
+    });
+  };
+
   return (
-    <Provider store={store}>
-      <AppNavigator />
-    </Provider>
+    <View style={styles.container}>
+      <Button
+        title="Trigger Notification"
+        onPress={triggerNotificationHandler}
+      />
+      <StatusBar style="auto" />
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Shop App 2",
+    "name": "Notification App",
     "description": "This is test shop app which help to understnd react-redux state management and auth with firebase",
     "slug": "shop-app",
     "privacy": "public",
@@ -31,7 +31,8 @@
       "favicon": "./app/assets/favicon.png"
     },
     "android": {
-      "package": "com.ambuj.ideata.expoproject"
+      "package": "com.ambuj.ideata.expoproject",
+      "useNextNotificationsApi": true
     }
   }
 }
