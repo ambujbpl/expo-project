@@ -33,6 +33,7 @@ export default function App() {
       })
       .then((response) => {
         const token = response.data;
+        console.log('token Data : ',response);
         setPushToken(token);
       })
       .catch((err) => {

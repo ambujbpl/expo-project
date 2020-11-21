@@ -1,0 +1,3 @@
+https://expo.io/notifications
+
+Pass Expo push token from your app { exe:- ExponentPushToken[bbRMaRCYY] } and and you can send notification from expo server
